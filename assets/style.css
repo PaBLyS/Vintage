@@ -1,0 +1,14 @@
+@font-face {
+  font-family: SuisseIntl; 
+  src: url('./fonts/SuisseIntl.woff');
+}
+
+@font-face {
+  font-family: SuisseIntl-Light; 
+  src: url('./fonts/SuisseIntl-Light.woff');
+}
+
+@font-face {
+  font-family: SuisseIntl-SemiBold; 
+  src: url('./fonts/SuisseIntl-SemiBold.woff');
+}
