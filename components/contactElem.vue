@@ -1,20 +1,34 @@
 <template>
   <div class="contactElem">
-    <h4 class="contactElem__label">{{label}}</h4>
-    <a :href="url" class="contactElem__link">{{link}}</a>
+    <p class="contactElem-label">{{label}}</p>
+    <a :href="url" class="contactElem-link">{{link}}</a>
   </div>
 </template>
 
 <script>
-  export default {
-    props: {
-      label: String,
-      link: String,
-      url: String
+    export default {
+        props: {
+            label: String,
+            link: String,
+            url: String
+        }
     }
-  }
 </script>
 
 <style lang="scss" scoped>
+  .contactElem {
 
+    &-label {
+      font-size: 15px;
+      color: #333333;
+      margin-bottom: 0;
+    }
+
+    &-link {
+      font-family: SuisseIntl-SemiBold, sans-serif;
+      font-size: 14px;
+      color: #3db565;
+      text-transform: uppercase;
+    }
+  }
 </style>
