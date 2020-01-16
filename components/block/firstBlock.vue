@@ -7,7 +7,7 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col cols="6">
+        <b-col cols="12" lg="6">
           <div class="firstBlock-col">
             <h3 class="firstBlock-col__sublabel"><span>GMS</span> Headquarters</h3>
             <div class="firstBlock-col__info">
@@ -24,7 +24,7 @@
             </div>
           </div>
         </b-col>
-        <b-col cols="6">
+        <b-col cols="12" lg="6">
           <div class="firstBlock-col">
             <h3 class="firstBlock-col__sublabel">Technical support <span>24/7</span></h3>
             <p class="firstBlock-col__content">GMS understands that it can be hard to follow all new technologies. We

@@ -2,11 +2,11 @@
   <div class="thirdBlock">
     <b-container>
       <b-row>
-        <b-col>
+        <b-col cols="12" lg="6">
           <h2 class="thirdBlock-label">Contact Us</h2>
           <custom-form/>
         </b-col>
-        <b-col>
+        <b-col cols="12" lg="6">
           <p class="thirdBlock-content">Please tell us more about your request and give us info about your company and country</p>
         </b-col>
       </b-row>

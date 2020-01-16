@@ -2,7 +2,7 @@
   <div class="secondBlock">
     <b-container>
       <b-row>
-        <b-col>
+        <b-col cols="12" lg="6">
           <div class="secondBlock-wrap">
             <h2 class="secondBlock-label">Our Offices</h2>
             <ul class="secondBlock-list">
@@ -20,7 +20,7 @@
             </div>
           </div>
         </b-col>
-        <b-col>
+        <b-col cols="12" lg="6">
           <map-block :point="offices[active]"/>
         </b-col>
       </b-row>
