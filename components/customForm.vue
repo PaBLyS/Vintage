@@ -1,6 +1,6 @@
 <template>
   <form class="form">
-    <div v-for="(elem, index) in inputs" :class="{'input-wrap': true, active: focus === index}">
+    <div v-for="(elem, index) in inputs" :class="{'input-wrap': true, active: focus === index, novalid: novalid(index)}">
       <label :for="`${elem.label}-${index}`" class="input-wrap__label">
         <span>{{elem.label}}</span>
         <input :type="elem.type"
@@ -8,7 +8,7 @@
                v-model="elem.value"
                class="input-wrap__elem"
                @focus="onFocus(index)"
-               @blur="onBlur()">
+               @blur="onBlur(index)">
       </label>
     </div>
     <div class="form-chbox">
@@ -17,50 +17,74 @@
         <span class="form-chbox__text">I agree the processing of personal data</span>
       </label>
     </div>
-    <input type="submit" value="Get in touch" class="form-submit" @click="submit">
+    <button value="Get in touch" :class="{'form-submit': true, disabled: disabledSubmit()}" @click="submit" :disabled="disabledSubmit()">
+      Get in touch
+    </button>
   </form>
 </template>
 
 <script>
+    import is from 'is_js'
+    import axios from 'axios';
+
     export default {
         name: "customForm",
         data() {
             return {
                 focus: null,
+                valid: [false, false, false],
                 inputs: [
                     {
                         type: 'text',
                         label: 'Name',
                         value: '',
-                        validate: false,
-                        touch: false
+                        touch: true
                     },
                     {
                         type: 'text',
                         label: 'Phone',
                         value: '',
-                        validate: false,
-                        touch: false
+                        touch: true
                     },
                     {
                         type: 'text',
                         label: 'Email',
                         value: '',
-                        validate: false,
-                        touch: false
+                        touch: true
                     }
                 ],
                 chb: false
             }
         },
         methods: {
+            disabledSubmit() {
+                let res = false;
+                this.valid.forEach(elem => {
+                    if (!elem) res = true
+                });
+                return !(!res && this.chb)
+            },
             onFocus(index) {
                 this.focus = index
             },
-            onBlur() {
-                this.focus = null
+            onBlur(index) {
+                this.focus = null;
+                this.inputs[index].touch = false
             },
-            submit(e) {
+            novalid(index) {
+                return !this.validate(index) && !this.inputs[index].touch
+            },
+            validate(index) {
+                let result = false;
+
+                if (index === 0) result = /^[а-яА-ЯёЁa-zA-Z ]+$/.test(this.inputs[index].value) && this.inputs[index].value.length <= 30 && this.inputs[index].value.length > 3;
+                else if (index === 1) result = /^\+380\d{9}$/.test(this.inputs[index].value);
+                else if (index === 2) result = is.email(this.inputs[index].value);
+
+                this.valid[index] = result;
+                return result
+            },
+            async submit(e) {
                 e.preventDefault();
                 let obj = {
                     name: this.inputs[0].value,
@@ -68,7 +92,12 @@
                     email: this.inputs[2].value,
                     chb: false
                 };
-                console.log(obj)
+                let res = await axios({
+                    method: 'post',
+                    url: 'http://httpbin.org/post',
+                    data: obj
+                })
+                console.log(res)
             }
         }
     }
@@ -122,6 +151,16 @@
           color: #ffffff;
         }
       }
+
+      &.novalid {
+        color: #ff0000!important;
+        border-bottom: 1px solid #ff0000!important;
+
+        .input-wrap__elem {
+          color: #ff0000!important;
+        }
+      }
+
 
       &__label {
         width: 100%;
