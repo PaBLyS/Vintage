@@ -94,7 +94,7 @@
                 };
                 let res = await axios({
                     method: 'post',
-                    url: 'http://httpbin.org/post',
+                    url: 'https://httpbin.org/post',
                     data: obj
                 })
                 console.log(res)
