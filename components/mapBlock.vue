@@ -239,9 +239,18 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .gmap {
     width: 100%;
+    height: 100%;
+
+    .GMap {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .GMap__Wrapper {
     height: 100%;
   }
 </style>
